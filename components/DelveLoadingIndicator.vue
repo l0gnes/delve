@@ -42,7 +42,7 @@ const phrases = [
 
 <template>
     <div class="w-full text-center flex-col justify-center my-2">
-        <UIcon name="i-mingcute-loading-fill" class="text-primary animate-spin flex w-full"/>
+        <UIcon name="i-mingcute-loading-fill" class="text-primary animate-spin"/>
         <span class="font-bold text-primary flex w-full justify-center mt-2">Loading...</span>
         <span v-if="show_tips" class="font-semibold my-1 text-gray-500 mx-3 text-sm">
             {{ phrases[Math.floor( Math.random() * (phrases.length) )] }}

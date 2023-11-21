@@ -96,7 +96,7 @@ onMounted(
         if(!toValue(community_data))
         {
             await profileRefresh();
-            console.log(toValue(profileData));
+            // console.log(toValue(profileData));
             await refresh().then(async () => await messageRefresh());
         }
     }
@@ -105,10 +105,8 @@ onMounted(
 watch(selected_tab_data, async (n, o) => {
     if(o) // if we are moving from some other channel
     {
-        console.log(`Unsubbing from channel: ${o.name}`);
-        await supa.removeChannel(
-            supa.channel(`channel:${o.channel_id}`)
-        );
+        // console.log(`Unsubbing from channel: ${o.name}`);
+        await supa.removeAllChannels();
     }
 
     if(n) // if we have gone to some other channel
@@ -123,20 +121,17 @@ watch(selected_tab_data, async (n, o) => {
                     filter : `channel_id=eq.${n.channel_id}`
                 },
                 (payload) => {
-                    // console.log(payload);
                     present_messages.value.push(payload.new);
                     // print(toValue(present_messages))
                 }
             )
             .subscribe(
-                (status) => {
-                    console.log(`Subbed to channel: ${n.name} // STATUS=${status}`)
-                }
+                // (status) => {
+                //     console.log(`Subbed to channel: ${n.name} // STATUS=${status}`)
+                // }
             )
     }
 })
-
-
 
 const message_field_content = ref('');
 const message_field_focused = ref(false);
