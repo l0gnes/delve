@@ -1,5 +1,15 @@
 <script setup>
 
+const head = useHead({
+    meta: [
+        {hid: 'description', name: 'description', content: "ummm uhhhh ummmm"},
+        { hid: 'og:title', property: 'og:title', content: "Delve" },
+        { hid: 'og:url', property: 'og:url', content: "delve.lognes.lol" },
+        { hid: 'og:description', property: 'og:description', content: "ummm uhhhh ummmm" },
+        { hid: 'og:image', property: 'og:image', content: "https://arhzbeuokzwekraduqga.supabase.co/storage/v1/object/public/server_resources/meta_img.png" },
+    ]
+})
+
 const user = useSupabaseUser();
 const profile = ref(null);
 
