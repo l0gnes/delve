@@ -63,7 +63,7 @@ const { data: messageData, pending: messagePending, refresh : messageRefresh } =
     },
     {
         lazy: true, server: false,
-        watch: [selected_tab_id]
+        watch: [data, selected_tab_id]
     },
 );
 
@@ -86,19 +86,7 @@ const { data: profileData, pending : profilesPending, refresh : profileRefresh }
         return ret_val;
     },
     {
-        lazy: true, server: false, immediate: true
-    }
-)
-
-// this is a hacky solution
-onMounted(
-    async () => {
-        if(!toValue(community_data))
-        {
-            await profileRefresh();
-            // console.log(toValue(profileData));
-            await refresh().then(async () => await messageRefresh());
-        }
+        lazy: true, server: false
     }
 )
 
@@ -106,7 +94,8 @@ watch(selected_tab_data, async (n, o) => {
     if(o) // if we are moving from some other channel
     {
         // console.log(`Unsubbing from channel: ${o.name}`);
-        await supa.removeAllChannels();
+        await supa.removeAllChannels(); // Ensure we are listening to no other channels
+        
     }
 
     if(n) // if we have gone to some other channel
